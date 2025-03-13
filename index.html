@@ -110,10 +110,28 @@ together.setMilliseconds(0);
 				startHeartAnimation();
 			}, 5000);
 
-			timeElapse(together);
-			setInterval(function () {
-				timeElapse(together);
-			}, 500);
+			function timeElapse(together) {
+    var now = new Date(); // Get current time
+    var timeDifference = now - together; // Time passed in milliseconds
+
+    // Calculate time components
+    var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+    var minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+    var seconds = Math.floor((timeDifference / 1000) % 60);
+
+    // Display the time she's been alive
+    var elapsedText = `Vishu has been spreading joy for ${days} Days, ${hours} Hours, ${minutes} Minutes, and ${seconds} Seconds 💖`;
+    document.getElementById('elapseClock').innerHTML = elapsedText;
+}
+;
+			timeElapse(together); // Initial call to start the display
+
+// Update the timer every second
+setInterval(function () {
+    timeElapse(together);
+}, 1000);
+
 
 			adjustCodePosition();
 			$("#code").typewriter();
